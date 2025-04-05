@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.lzj.SupermarketSystemApplicationTests" time="4.155" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.lzj.SupermarketSystemApplicationTests" time="4.196" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CN"/>
     <property name="sun.boot.library.path" value="D:\app\jdk23\bin"/>
-    <property name="sun.java.command" value="C:\Users\MR\AppData\Local\Temp\surefire5609673009965019263\surefirebooter-20250405110641869_3.jar C:\Users\MR\AppData\Local\Temp\surefire5609673009965019263 2025-04-05T11-06-41_751-jvmRun1 surefire-20250405110641869_1tmp surefire_0-20250405110641869_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\MR\AppData\Local\Temp\surefire10885547168652477475\surefirebooter-20250405112652852_3.jar C:\Users\MR\AppData\Local\Temp\surefire10885547168652477475 2025-04-05T11-26-52_741-jvmRun1 surefire-20250405112652852_1tmp surefire_0-20250405112652852_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\桌面\学习\项目\SupermarketSystem\target\test-classes;D:\桌面\学习\项目\SupermarketSystem\target\classes;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-data-jdbc\3.4.3\spring-boot-starter-data-jdbc-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.4.3\spring-boot-starter-jdbc-3.4.3.jar;C:\Users\MR\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\MR\.m2\repository\org\springframework\spring-jdbc\6.2.3\spring-jdbc-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\data\spring-data-jdbc\3.4.3\spring-data-jdbc-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\data\spring-data-relational\3.4.3\spring-data-relational-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\data\spring-data-commons\3.4.3\spring-data-commons-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-tx\6.2.3\spring-tx-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-context\6.2.3\spring-context-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-beans\6.2.3\spring-beans-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-thymeleaf\3.4.3\spring-boot-starter-thymeleaf-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.3\spring-boot-starter-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot\3.4.3\spring-boot-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.3\spring-boot-starter-logging-3.4.3.jar;C:\Users\MR\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\MR\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\MR\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\MR\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\MR\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\MR\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\MR\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\MR\.m2\repository\org\thymeleaf\thymeleaf-spring6\3.1.3.RELEASE\thymeleaf-spring6-3.1.3.RELEASE.jar;C:\Users\MR\.m2\repository\org\thymeleaf\thymeleaf\3.1.3.RELEASE\thymeleaf-3.1.3.RELEASE.jar;C:\Users\MR\.m2\repository\org\attoparser\attoparser\2.0.7.RELEASE\attoparser-2.0.7.RELEASE.jar;C:\Users\MR\.m2\repository\org\unbescape\unbescape\1.1.6.RELEASE\unbescape-1.1.6.RELEASE.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.3\spring-boot-starter-web-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.3\spring-boot-starter-json-3.4.3.jar;C:\Users\MR\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\MR\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\MR\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\MR\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\MR\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\MR\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.3\spring-boot-starter-tomcat-3.4.3.jar;C:\Users\MR\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.36\tomcat-embed-core-10.1.36.jar;C:\Users\MR\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.36\tomcat-embed-el-10.1.36.jar;C:\Users\MR\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.36\tomcat-embed-websocket-10.1.36.jar;C:\Users\MR\.m2\repository\org\springframework\spring-web\6.2.3\spring-web-6.2.3.jar;C:\Users\MR\.m2\repository\io\micrometer\micrometer-observation\1.14.4\micrometer-observation-1.14.4.jar;C:\Users\MR\.m2\repository\io\micrometer\micrometer-commons\1.14.4\micrometer-commons-1.14.4.jar;C:\Users\MR\.m2\repository\org\springframework\spring-webmvc\6.2.3\spring-webmvc-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-expression\6.2.3\spring-expression-6.2.3.jar;C:\Users\MR\.m2\repository\com\mysql\mysql-connector-j\9.1.0\mysql-connector-j-9.1.0.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.3\spring-boot-starter-test-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-test\3.4.3\spring-boot-test-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.3\spring-boot-test-autoconfigure-3.4.3.jar;C:\Users\MR\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\MR\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\MR\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\MR\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\MR\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\MR\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\MR\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\MR\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\MR\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\MR\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\MR\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\MR\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\MR\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\MR\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\MR\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\MR\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\MR\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\MR\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\MR\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\MR\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\MR\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\MR\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\MR\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\MR\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\MR\.m2\repository\org\springframework\spring-core\6.2.3\spring-core-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-jcl\6.2.3\spring-jcl-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-test\6.2.3\spring-test-6.2.3.jar;C:\Users\MR\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\MR\.m2\repository\com\baomidou\mybatis-plus-spring-boot3-starter\3.5.6\mybatis-plus-spring-boot3-starter-3.5.6.jar;C:\Users\MR\.m2\repository\com\baomidou\mybatis-plus\3.5.6\mybatis-plus-3.5.6.jar;C:\Users\MR\.m2\repository\com\baomidou\mybatis-plus-core\3.5.6\mybatis-plus-core-3.5.6.jar;C:\Users\MR\.m2\repository\com\baomidou\mybatis-plus-annotation\3.5.6\mybatis-plus-annotation-3.5.6.jar;C:\Users\MR\.m2\repository\com\baomidou\mybatis-plus-extension\3.5.6\mybatis-plus-extension-3.5.6.jar;C:\Users\MR\.m2\repository\org\mybatis\mybatis\3.5.16\mybatis-3.5.16.jar;C:\Users\MR\.m2\repository\com\github\jsqlparser\jsqlparser\4.9\jsqlparser-4.9.jar;C:\Users\MR\.m2\repository\org\mybatis\mybatis-spring\3.0.3\mybatis-spring-3.0.3.jar;C:\Users\MR\.m2\repository\com\baomidou\mybatis-plus-spring-boot-autoconfigure\3.5.6\mybatis-plus-spring-boot-autoconfigure-3.5.6.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.3\spring-boot-autoconfigure-3.4.3.jar;C:\Users\MR\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar;C:\Users\MR\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.4.3\spring-boot-starter-security-3.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\spring-aop\6.2.3\spring-aop-6.2.3.jar;C:\Users\MR\.m2\repository\org\springframework\security\spring-security-config\6.4.3\spring-security-config-6.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\security\spring-security-core\6.4.3\spring-security-core-6.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\security\spring-security-crypto\6.4.3\spring-security-crypto-6.4.3.jar;C:\Users\MR\.m2\repository\org\springframework\security\spring-security-web\6.4.3\spring-security-web-6.4.3.jar;C:\Users\MR\.m2\repository\org\thymeleaf\extras\thymeleaf-extras-springsecurity6\3.1.3.RELEASE\thymeleaf-extras-springsecurity6-3.1.3.RELEASE.jar;C:\Users\MR\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\MR\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\MR\.m2\repository\com\alibaba\fastjson\1.2.83\fastjson-1.2.83.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\MR\AppData\Local\Temp\surefire5609673009965019263\surefirebooter-20250405110641869_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\MR\AppData\Local\Temp\surefire10885547168652477475\surefirebooter-20250405112652852_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="23.0.1+11-39"/>
@@ -53,7 +53,7 @@
     <property name="user.dir" value="D:\桌面\学习\项目\SupermarketSystem"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="92472"/>
+    <property name="PID" value="90292"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="GBK"/>
@@ -66,9 +66,9 @@
     <property name="java.class.version" value="67.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[SupermarketSystem] "/>
   </properties>
-  <testcase name="testGoodstypeMapper" classname="com.lzj.SupermarketSystemApplicationTests" time="0.843">
-    <system-out><![CDATA[11:06:42.614 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.lzj.SupermarketSystemApplicationTests]: SupermarketSystemApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-11:06:42.720 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.lzj.SupermarketSystemApplication for test class com.lzj.SupermarketSystemApplicationTests
+  <testcase name="testGoodstypeMapper" classname="com.lzj.SupermarketSystemApplicationTests" time="0.813">
+    <system-out><![CDATA[11:26:53.598 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.lzj.SupermarketSystemApplicationTests]: SupermarketSystemApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:26:53.700 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.lzj.SupermarketSystemApplication for test class com.lzj.SupermarketSystemApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -79,28 +79,28 @@
 
  :: Spring Boot ::                (v3.4.3)
 
-2025-04-05T11:06:43.122+08:00  INFO 92472 --- [SupermarketSystem] [           main] c.lzj.SupermarketSystemApplicationTests  : Starting SupermarketSystemApplicationTests using Java 23.0.1 with PID 92472 (started by MR in D:\桌面\学习\项目\SupermarketSystem)
-2025-04-05T11:06:43.123+08:00  INFO 92472 --- [SupermarketSystem] [           main] c.lzj.SupermarketSystemApplicationTests  : The following 1 profile is active: "dav"
-2025-04-05T11:06:43.771+08:00  INFO 92472 --- [SupermarketSystem] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-04-05T11:06:43.793+08:00  INFO 92472 --- [SupermarketSystem] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
+2025-04-05T11:26:54.101+08:00  INFO 90292 --- [SupermarketSystem] [           main] c.lzj.SupermarketSystemApplicationTests  : Starting SupermarketSystemApplicationTests using Java 23.0.1 with PID 90292 (started by MR in D:\桌面\学习\项目\SupermarketSystem)
+2025-04-05T11:26:54.102+08:00  INFO 90292 --- [SupermarketSystem] [           main] c.lzj.SupermarketSystemApplicationTests  : The following 1 profile is active: "dav"
+2025-04-05T11:26:54.693+08:00  INFO 90292 --- [SupermarketSystem] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-04-05T11:26:54.715+08:00  INFO 90292 --- [SupermarketSystem] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 0 JDBC repository interfaces.
 Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
 Use localhost address 
 Get lzj/10.63.1.214 network interface 
 Get network interface info: name:wireless_32768 (RZ608 Wi-Fi 6E 80MHz)
-Initialization Sequence datacenterId:14 workerId:19
+Initialization Sequence datacenterId:14 workerId:17
  _ _   |_  _ _|_. ___ _ |    _ 
 | | |\/|_)(_| | |_\  |_)||_|_\ 
      /               |         
                         3.5.6 
-2025-04-05T11:06:44.596+08:00  INFO 92472 --- [SupermarketSystem] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
-2025-04-05T11:06:44.670+08:00  INFO 92472 --- [SupermarketSystem] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2025-04-05T11:06:45.165+08:00  INFO 92472 --- [SupermarketSystem] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-04-05T11:06:45.482+08:00  INFO 92472 --- [SupermarketSystem] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@57b130f6
-2025-04-05T11:06:45.484+08:00  INFO 92472 --- [SupermarketSystem] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-04-05T11:06:45.669+08:00  INFO 92472 --- [SupermarketSystem] [           main] c.lzj.SupermarketSystemApplicationTests  : Started SupermarketSystemApplicationTests in 2.827 seconds (process running for 3.688)
+2025-04-05T11:26:55.579+08:00  INFO 90292 --- [SupermarketSystem] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2025-04-05T11:26:55.672+08:00  INFO 90292 --- [SupermarketSystem] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-05T11:26:56.228+08:00  INFO 90292 --- [SupermarketSystem] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-05T11:26:56.541+08:00  INFO 90292 --- [SupermarketSystem] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@43d6262c
+2025-04-05T11:26:56.542+08:00  INFO 90292 --- [SupermarketSystem] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-05T11:26:56.725+08:00  INFO 90292 --- [SupermarketSystem] [           main] c.lzj.SupermarketSystemApplicationTests  : Started SupermarketSystemApplicationTests in 2.908 seconds (process running for 3.768)
 Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ce760af] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1213461906 wrapping com.mysql.cj.jdbc.ConnectionImpl@57b130f6] will not be managed by Spring
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6e5b3642] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1520366382 wrapping com.mysql.cj.jdbc.ConnectionImpl@43d6262c] will not be managed by Spring
 ==>  Preparing: SELECT goods_type_id,goods_type_name FROM goodstype
 ==> Parameters: 
 <==    Columns: goods_type_id, goods_type_name
@@ -113,7 +113,7 @@ JDBC Connection [HikariProxyConnection@1213461906 wrapping com.mysql.cj.jdbc.Con
 <==        Row: 7, 智能穿戴
 <==        Row: 8, 生活用品
 <==      Total: 8
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7ce760af]
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6e5b3642]
 [Goodstype(goodsTypeId=1, goodsTypeName=美味食品), Goodstype(goodsTypeId=2, goodsTypeName=手机数码), Goodstype(goodsTypeId=3, goodsTypeName=电脑办公), Goodstype(goodsTypeId=4, goodsTypeName=游戏娱乐), Goodstype(goodsTypeId=5, goodsTypeName=音频设备), Goodstype(goodsTypeId=6, goodsTypeName=优品服饰), Goodstype(goodsTypeId=7, goodsTypeName=智能穿戴), Goodstype(goodsTypeId=8, goodsTypeName=生活用品)]
 ]]></system-out>
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
@@ -123,10 +123,10 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="getGoodsPage" classname="com.lzj.SupermarketSystemApplicationTests" time="0.104">
+  <testcase name="getGoodsPage" classname="com.lzj.SupermarketSystemApplicationTests" time="0.098">
     <system-out><![CDATA[Creating a new SqlSession
-Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63e648a0]
-JDBC Connection [HikariProxyConnection@1879326995 wrapping com.mysql.cj.jdbc.ConnectionImpl@57b130f6] will be managed by Spring
+Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@585672dd]
+JDBC Connection [HikariProxyConnection@1255012071 wrapping com.mysql.cj.jdbc.ConnectionImpl@43d6262c] will be managed by Spring
 ==>  Preparing: SELECT COUNT(*) AS total FROM goods
 ==> Parameters: 
 <==    Columns: total
@@ -141,10 +141,10 @@ JDBC Connection [HikariProxyConnection@1879326995 wrapping com.mysql.cj.jdbc.Con
 <==        Row: 6b8a2e2d948e428d, GTB(电子版), 4, 325.60, /img/goods/6b8a2e2d948e428d.png, <<BLOB>>, 33, 2025-03-03 23:16:15, 2025-04-03 23:22:18
 <==        Row: 7017080951d84ea7, 办公电脑, 3, 8999.90, null, <<BLOB>>, 33, 2025-04-04 12:42:39, 2025-04-04 12:42:39
 <==      Total: 5
-Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63e648a0]
-Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63e648a0]
-Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63e648a0]
-Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@63e648a0]
+Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@585672dd]
+Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@585672dd]
+Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@585672dd]
+Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@585672dd]
 Goods(goodsId=4cc55950710a4d05, goodsName=纸巾, goodsType=8, price=15.00, imageUrl=/img/goods/4cc55950710a4d05.png, description=生活纸巾，4层抽纸，450抽大抽, inventory=500, datetime=2025-04-04T12:47:55, updateTime=2025-04-04T12:47:55)
 Goods(goodsId=554761f03cf24898, goodsName=测试8, goodsType=4, price=113.00, imageUrl=null, description=测试, inventory=1412, datetime=2025-04-01T21:43:46, updateTime=2025-04-01T21:43:46)
 Goods(goodsId=6b373b60a75d4e91, goodsName=智能热水壶, goodsType=8, price=45.00, imageUrl=/img/goods/6b373b60a75d4e91.png, description=智能热水壶, inventory=130, datetime=2025-04-04T12:48:25, updateTime=2025-04-04T12:48:25)

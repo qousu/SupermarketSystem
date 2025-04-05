@@ -272,7 +272,7 @@ public String gonewproduct(
     public String addToCart(@PathVariable("id") String goodsId,
                             Principal principal,
                             Model model) {
-        // 1. 获取用户信息（带判空）
+        // 1. 获取用户信息
         String username = principal.getName();
         QueryWrapper<User> userWrapper = new QueryWrapper<>();
         userWrapper.eq("username", username);
@@ -281,7 +281,7 @@ public String gonewproduct(
             throw new RuntimeException("用户不存在");
         }
 
-        // 2. 获取商品信息（带判空）
+        // 2. 获取商品信息
         Goods goods = goodsMapper.selectById(goodsId);
         if (goods == null) {
             throw new RuntimeException("商品不存在");
@@ -299,7 +299,7 @@ public String gonewproduct(
         // 4. 处理购物车逻辑
         QueryWrapper<Cart> cartWrapper = new QueryWrapper<>();
         cartWrapper.eq("cart_user_id", user.getUserId());
-        Cart userCart = cartMapper.selectOne(cartWrapper);
+        Cart userCart = cartMapper.selectOne(cartWrapper); // 根据用户id查询购物车
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
