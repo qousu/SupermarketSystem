@@ -1,2 +1,2 @@
 # SupermarketSystem
-springboot+springMVC
+springboot+springMVC整合开发的小型web项目
