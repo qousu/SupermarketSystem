@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>管理员-添加用户界面</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+          onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+    <!-- Bootstrap 图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+          onerror="this.onerror=null;">
+    <!-- 已有的本地引用保留作为备选 -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+    <!-- Bootstrap 图标 本地链接 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <style>
+        .bg-admin {
+            background-color: #e3f2fd!important;
+            color: #0d6efd!important;
+        }
+        .bg-user {
+            background-color: #fff3cd!important;
+            color: #ffc107!important;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .bg-admin { background-color: #e3f2fd!important; color: #0d6efd!important; }
+        .bg-user { background-color: #fff3cd!important; color: #ffc107!important; }
+        .table-hover tbody tr:hover { background-color: #f8f9fa; }
+        /*    本人提示*/
+        .current-user-row {
+            background-color: rgba(13, 110, 253, 0.05) !important;
+            border-left: 3px solid #0d0fac;
+            position: relative;
+        }
+
+        /* 添加鼠标悬停效果 */
+        .current-user-row:hover {
+            background-color: rgba(13, 110, 253, 0.08) !important;
+        }
+
+        /* 添加动画指示条 */
+        .current-user-row::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, #0d2dfd 0%, transparent 100%);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="container-fluid p-0">
+    <div class="row g-0">
+        <!-- 侧边栏 -->
+        <div class="col-auto px-0 sidebar" id="sidebar">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-relative">
+                <!-- 侧边栏标题和收起按钮 - 合并在一起 -->
+                <div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none w-100">
+                    <div class="d-flex align-items-center flex-grow-1 sidebar-header">
+                        <i class="bi bi-bag-check fs-4"></i>
+                        <span class="fs-5 d-none d-sm-inline ms-2">修改信息</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-light border-0" id="sidebarToggle">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                </div>
+                <!-- 侧边栏菜单 -->
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/a/system}">
+                            <i class="bi bi-house"></i>
+                            <span>主页</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-list-check"></i> 管理
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/a/userManagement}"><i class="bi bi-heart"></i> 用户管理</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/a/goodsManagement}"><i class="bi bi-phone"></i>商品管理</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="col ps-md-2 pt-2" id="main-content">
+            <!-- 导航栏 -->
+            <nav class="navbar navbar-expand-lg navbar-light rounded">
+                <div class="container-fluid">
+                    <!-- 侧边栏折叠按钮（在小屏幕上显示） -->
+                    <button class="btn btn-light d-md-none" id="navSidebarToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <!-- 导航栏左侧选项 -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" th:href="@{/a/system}">主页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">编辑活动</a>
+                            </li>
+                        </ul>
+
+                        <!-- 搜索框和用户头像 -->
+                        <div class="d-flex align-items-center">
+                            <form class="d-flex me-3">
+                                <div class="input-group">
+                                    <input class="form-control" type="search" placeholder="搜索商品..." aria-label="Search">
+                                    <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                                </div>
+                            </form>
+
+                            <!-- 用户头像下拉菜单 - 调整位置 -->
+                            <div class="user-dropdown">
+                                <div class="user-dropdown-wrapper"></div>
+                                <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown">
+                                    <img src="https://via.placeholder.com/35" th:text="${#authentication.principal.username}" alt="用户头像" width="35" height="35" class="rounded-circle">
+                                </a>
+                                <div class="dropdown-connector"></div>
+                                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" th:href="@{/u/index}"><i class="bi bi-clock-history"></i> 回到商城</a></li>
+
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/logout}" methods="post">
+                                            <i class="bi bi-box-arrow-right"></i> 退出登录
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- 添加用户 -->
+            <div class="container-lg mt-4">
+                <form th:action="@{/a/adduser}" method="post" class="charts-render-monitor" style="max-width: 500px; width: 100%;">
+                    <input type="hidden" name="userid" >
+
+                    <div class="form-group">
+                        <label for="username">用户名：</label>
+                        <input type="text" id="username" name="userName" class="form-control" value="张三">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="username">密码：</label>
+                        <input type="text" id="password" name="password" class="form-control" value="123">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="email">邮箱：</label>
+                        <input type="email" id="email" name="email" class="form-control" value="zhangsan@example.com">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="age">年龄：</label>
+                        <input type="text" id="age" name="age" class="form-control" value="18">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div>性别：</div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="gender-male" name="gender" value="1" class="form-check-input"
+                                   checked>
+                            <label class="form-check-label" for="gender-male">男</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="gender-female" name="gender" value="0" class="form-check-input">
+                            <label class="form-check-label" for="gender-female">女</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="number">手机号：</label>
+                        <input type="text" id="number" name="number" class="form-control" value="10086">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="address">地址：</label>
+                        <input type="text" id="address" name="address" class="form-control" value="广东白云区xxx街道xx号">
+                    </div>
+                    <hr>
+<!--                    创建时间是自动填充-->
+
+                    <!-- 提交按钮区域 -->
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary mr-3">提交</button>
+                        <button type="reset" class="btn btn-secondary">重置</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap 本地 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+<!-- 自定义脚本 -->
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+
+</html>

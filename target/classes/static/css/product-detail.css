@@ -1,0 +1,256 @@
+.product-gallery {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gallery-main {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.gallery-thumbs {
+    height: 80px;
+}
+
+.gallery-thumbs .swiper-slide {
+    width: 80px;
+    height: 80px;
+    opacity: 0.4;
+    cursor: pointer;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.gallery-thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-price {
+    color: #ff5722;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.product-original-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.product-stats {
+    color: #666;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.spec-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.spec-title {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.spec-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.spec-option {
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.spec-option:hover {
+    border-color: #ff5722;
+    color: #ff5722;
+}
+
+.spec-option.active {
+    background-color: #ff5722;
+    color: white;
+    border-color: #ff5722;
+}
+
+.quantity-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.quantity-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #666;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quantity-btn:hover {
+    background: #f5f5f5;
+}
+
+.quantity-input {
+    width: 60px;
+    height: 36px;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-add-cart, .btn-buy-now {
+    flex: 1;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.btn-add-cart {
+    background-color: #fff;
+    border: 1px solid #ff5722;
+    color: #ff5722;
+}
+
+.btn-buy-now {
+    background-color: #ff5722;
+    border: 1px solid #ff5722;
+    color: white;
+}
+
+.product-detail-tabs {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-tabs .nav-link {
+    color: #666;
+    border: none;
+    padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #ff5722;
+    border-bottom: 2px solid #ff5722;
+    font-weight: 500;
+}
+
+.tab-content {
+    padding: 20px 0;
+}
+
+.detail-img {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-rating {
+    color: #ffc107;
+}
+
+.review-content {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.review-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.review-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.breadcrumb a {
+    color: inherit; /* 继承父元素的颜色，通常是黑色 */
+    text-decoration: none; /* 去掉下划线 */
+}
+
+.breadcrumb a:hover {
+    color: inherit; /* 保持鼠标悬停时的颜色不变 */
+    text-decoration: none; /* 保持鼠标悬停时没有下划线 */
+}

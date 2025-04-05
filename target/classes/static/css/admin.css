@@ -1,0 +1,180 @@
+/* 修改商品分类下拉菜单样式 */
+.nav-item.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 220px;
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+    z-index: 1000;
+    margin-left: 10px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.nav-item.dropdown.show .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.nav-item.dropdown .dropdown-item {
+    padding: 10px 20px;
+    color: #333;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+}
+
+.nav-item.dropdown .dropdown-item:hover {
+    background-color: #fff5f2;
+    color: #ff5722;
+    border-left-color: #ff5722;
+    padding-left: 25px;
+}
+
+.nav-item.dropdown .dropdown-item i {
+    font-size: 1.2rem;
+    color: #ff5722;
+    transition: transform 0.2s ease;
+}
+
+.nav-item.dropdown .dropdown-item:hover i {
+    transform: scale(1.1);
+}
+
+.nav-item.dropdown .dropdown-divider {
+    margin: 8px 0;
+    border-color: #eee;
+}
+
+/* 修改箭头指示器 */
+.nav-item.dropdown > .nav-link::after {
+    content: '\F282';
+    font-family: 'Bootstrap Icons';
+    margin-left: 8px;
+    vertical-align: middle;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-item.dropdown.show > .nav-link::after {
+    transform: rotate(90deg);
+}
+
+/* 确保下拉菜单在悬停时不会消失 */
+.nav-item.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 添加下拉菜单的过渡效果 */
+.dropdown-menu {
+    transition: all 0.3s ease;
+}
+
+/* 添加菜单项动画效果 */
+.dropdown-item {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 添加一个透明的连接区域 */
+.nav-item.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -10px;
+    width: 20px;
+    height: 100%;
+    background: transparent;
+    z-index: 1001;
+}
+
+/* 用户头像下拉菜单样式 */
+.user-dropdown {
+    position: relative;
+}
+
+.user-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background-color: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 1000;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translate(-50%, -10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.user-dropdown.show .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+}
+
+/* 用户头像下拉菜单连接区域 */
+.user-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    z-index: 1001;
+}
+
+/* 添加下拉菜单箭头 */
+.user-dropdown .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+}
+
+/* 用户头像样式优化 */
+.user-dropdown img {
+    transition: transform 0.3s ease;
+}
+
+.user-dropdown:hover img {
+    transform: scale(1.05);
+}

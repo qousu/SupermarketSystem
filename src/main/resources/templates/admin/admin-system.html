@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>管理员界面</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+        onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+  <!-- Bootstrap 图标 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        onerror="this.onerror=null;">
+  <!-- 已有的本地引用保留作为备选 -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+  <!-- Bootstrap 图标 本地链接 -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+
+<body>
+<div class="container-fluid p-0">
+  <div class="row g-0">
+    <!-- 侧边栏 -->
+    <div class="col-auto px-0 sidebar" id="sidebar">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-relative">
+        <!-- 侧边栏标题和收起按钮 - 合并在一起 -->
+        <div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none w-100">
+          <div class="d-flex align-items-center flex-grow-1 sidebar-header">
+            <i class="bi bi-bag-check fs-4"></i>
+            <span class="fs-5 d-none d-sm-inline ms-2">修改信息</span>
+          </div>
+          <button class="btn btn-sm btn-outline-light border-0" id="sidebarToggle">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+        </div>
+        <!-- 侧边栏菜单 -->
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/a/system}">
+              <i class="bi bi-house"></i>
+              <span>主页</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-list-check"></i> 管理
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" th:href="@{/a/userManagement}"><i class="bi bi-heart"></i> 用户管理</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" th:href="@{/a/goodsManagement}"><i class="bi bi-phone"></i>商品管理</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="col ps-md-2 pt-2" id="main-content">
+      <!-- 导航栏 -->
+      <nav class="navbar navbar-expand-lg navbar-light rounded">
+        <div class="container-fluid">
+          <!-- 侧边栏折叠按钮（在小屏幕上显示） -->
+          <button class="btn btn-light d-md-none" id="navSidebarToggle">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <!-- 导航栏左侧选项 -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" th:href="@{/a/system}">主页</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">编辑活动</a>
+              </li>
+            </ul>
+
+            <!-- 搜索框和用户头像 -->
+            <div class="d-flex align-items-center">
+              <form class="d-flex me-3">
+                <div class="input-group">
+                  <input class="form-control" type="search" placeholder="搜索商品..." aria-label="Search">
+                  <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+              </form>
+
+              <!-- 用户头像下拉菜单 - 调整位置 -->
+              <div class="user-dropdown">
+                <div class="user-dropdown-wrapper"></div>
+                <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown">
+                  <img src="https://via.placeholder.com/35" th:text="${#authentication.principal.username}" alt="用户头像" width="35" height="35" class="rounded-circle">
+                </a>
+                <div class="dropdown-connector"></div>
+                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                  <li><a class="dropdown-item" th:href="@{/u/index}" sec:authorize="hasRole('ROLE_ADMIN')"><i class="bi bi-clock-history"></i> 回到商城</a></li>
+
+                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <a class="dropdown-item" th:href="@{/logout}" methods="post">
+                      <i class="bi bi-box-arrow-right"></i> 退出登录
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 主页面内容 -->
+      <div class="container-fluid mt-3">
+        <!-- 轮播图 -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner rounded">
+                <div class="carousel-item active">
+                  <img src="https://via.placeholder.com/1200x400?text=限时特惠" class="d-block w-100" alt="促销活动">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>限时特惠活动</h5>
+                    <p>全场商品低至5折，优惠多多！</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="https://via.placeholder.com/1200x400?text=新品上市" class="d-block w-100" alt="新品上市">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>新品上市</h5>
+                    <p>最新时尚单品，限量发售中！</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="https://via.placeholder.com/1200x400?text=会员专享" class="d-block w-100" alt="会员专享">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>会员专享优惠</h5>
+                    <p>会员专享价，更多惊喜等你发现！</p>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">上一个</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">下一个</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 快速分类区 -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <h3 class="border-bottom pb-2">快速浏览</h3>
+          </div>
+          <div class="col-md-2 col-4 mb-3 text-center">
+            <div class="quick-category p-2">
+              <a href="#" class="text-decoration-none">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px;">
+                  <i class="bi bi-phone text-primary" style="font-size: 2rem;"></i>
+                </div>
+                <p class="mt-2 mb-0">手机数码</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-4 mb-3 text-center">
+            <div class="quick-category p-2">
+              <a href="#" class="text-decoration-none">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px;">
+                  <i class="bi bi-laptop text-success" style="font-size: 2rem;"></i>
+                </div>
+                <p class="mt-2 mb-0">电脑办公</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-4 mb-3 text-center">
+            <div class="quick-category p-2">
+              <a href="#" class="text-decoration-none">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px;">
+                  <i class="bi bi-controller text-danger" style="font-size: 2rem;"></i>
+                </div>
+                <p class="mt-2 mb-0">游戏娱乐</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-4 mb-3 text-center">
+            <div class="quick-category p-2">
+              <a href="#" class="text-decoration-none">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px;">
+                  <i class="bi bi-earbuds text-warning" style="font-size: 2rem;"></i>
+                </div>
+                <p class="mt-2 mb-0">音频设备</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-4 mb-3 text-center">
+            <div class="quick-category p-2">
+              <a href="#" class="text-decoration-none">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px;">
+                  <i class="bi bi-watch text-info" style="font-size: 2rem;"></i>
+                </div>
+                <p class="mt-2 mb-0">智能穿戴</p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-2 col-4 mb-3 text-center">
+            <div class="quick-category p-2">
+              <a href="#" class="text-decoration-none">
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px;">
+                  <i class="bi bi-basket text-secondary" style="font-size: 2rem;"></i>
+                </div>
+                <p class="mt-2 mb-0">更多分类</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 热门商品区域 -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <h3 class="border-bottom pb-2 d-flex justify-content-between align-items-center">
+              <span>热门商品</span>
+              <a href="#" class="btn btn-sm btn-outline-primary">查看更多</a>
+            </h3>
+          </div>
+        </div>
+        <div class="row">
+          <!-- 商品卡片示例 -->
+          <div class="col-md-3 mb-4">
+            <div class="card h-100 position-relative">
+              <span class="badge-sale">限时特惠</span>
+              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="商品图片">
+              <div class="card-body">
+                <h5 class="card-title">高端智能手机</h5>
+                <p class="card-text">最新款智能手机，性能强大，拍照清晰...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="text-danger fw-bold mb-0">¥ 2999.00</p>
+                  <small class="text-muted text-decoration-line-through">¥ 3699.00</small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <button class="btn btn-primary btn-sm"><i class="bi bi-cart-plus"></i> 加入购物车</button>
+                  <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-heart"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="商品图片">
+              <div class="card-body">
+                <h5 class="card-title">无线蓝牙耳机</h5>
+                <p class="card-text">高品质音效，超长续航，舒适佩戴体验...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="text-danger fw-bold mb-0">¥ 199.00</p>
+                  <small class="text-muted"></small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <button class="btn btn-primary btn-sm"><i class="bi bi-cart-plus"></i> 加入购物车</button>
+                  <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-heart"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4">
+            <div class="card h-100 position-relative">
+              <span class="badge-sale">新品</span>
+              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="商品图片">
+              <div class="card-body">
+                <h5 class="card-title">智能手表</h5>
+                <p class="card-text">多功能健康监测，运动追踪，支持多种消息提醒...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="text-danger fw-bold mb-0">¥ 399.00</p>
+                  <small class="text-muted"></small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <button class="btn btn-primary btn-sm"><i class="bi bi-cart-plus"></i> 加入购物车</button>
+                  <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-heart"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-4">
+            <div class="card h-100 position-relative">
+              <span class="badge-sale">热销</span>
+              <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="商品图片">
+              <div class="card-body">
+                <h5 class="card-title">便携充电宝</h5>
+                <p class="card-text">大容量，快速充电，轻薄便携设计...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="text-danger fw-bold mb-0">¥ 149.00</p>
+                  <small class="text-muted text-decoration-line-through">¥ 199.00</small>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <button class="btn btn-primary btn-sm"><i class="bi bi-cart-plus"></i> 加入购物车</button>
+                  <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-heart"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Bootstrap 本地 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+<!-- 自定义脚本 -->
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
+
+</body>
+
+</html>

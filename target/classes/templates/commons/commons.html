@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+          onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+    <!-- Bootstrap 图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+          onerror="this.onerror=null;">
+    <!-- 已有的本地引用保留作为备选 -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+    <!-- Bootstrap 图标 本地链接 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container-fluid p-0">
+
+    <!-- 侧边栏 -->
+    <div class="col-auto px-0 sidebar" id="sidebar" th:fragment="sidebar">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-relative">
+            <!-- 侧边栏标题和收起按钮 -->
+            <div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none w-100">
+                <div class="d-flex align-items-center flex-grow-1 sidebar-header">
+                    <i class="bi bi-bag-check fs-4"></i>
+                    <span class="fs-5 d-none d-sm-inline ms-2">购物分类</span>
+                </div>
+                <button class="btn btn-sm btn-outline-light border-0" id="sidebarToggle">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+            </div>
+            <!-- 侧边栏菜单 -->
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
+                id="menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-house"></i>
+                        <span>主页</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-list-check"></i> 商品分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="products.html?category=electronics"><i
+                                class="bi bi-phone"></i> 数码电器</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=beauty"><i class="bi bi-heart"></i>
+                            美妆个护</a></li>
+                        <li><a class="dropdown-item" href="products.html?category=food"><i class="bi bi-cup"></i> 食品生鲜</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="products.html?category=home"><i class="bi bi-house"></i> 家居日用</a>
+                        </li>
+                        <li><a class="dropdown-item" href="products.html?category=books"><i class="bi bi-book"></i> 图书文娱</a>
+                        </li>
+                        <li><a class="dropdown-item" href="products.html?category=sports"><i class="bi bi-trophy"></i>
+                            运动户外</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-trophy"></i>
+                        <span>热销商品</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-heart"></i>
+                        <span>收藏夹</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-cart"></i>
+                        <span>购物车</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- 导航栏 -->
+    <div th:fragment="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light rounded">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- 导航栏左侧选项 -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/u/index.html}">主页</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/u/gonewproduct}">新品上市</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/u/goproduct}">优惠活动</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/u/cart}">购物车</a>
+                        </li>
+                    </ul>
+
+                    <!-- 搜索框和用户头像 -->
+                    <div class="d-flex align-items-center">
+                        <form class="d-flex me-3">
+                            <div class="input-group">
+                                <input class="form-control" type="search" placeholder="搜索商品..." aria-label="Search">
+                                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- 用户头像下拉菜单 -->
+                        <div class="user-dropdown">
+                            <div class="user-dropdown-wrapper"></div>
+                            <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown">
+                                <img src="https://via.placeholder.com/35"
+                                     th:text="${#authentication.principal.username}" alt="用户头像" width="35"
+                                     height="35" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-connector"></div>
+                            <ul class="dropdown-menu dropdown-menu-end text-small shadow"
+                                aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" th:href="@{/u/userInfo}"
+                                       sec:authorize="hasRole('ROLE_USER')"><i class="bi bi-person"></i> 个人资料</a>
+                                </li>
+                                <li><a class="dropdown-item" th:href="@{/order}"><i class="bi bi-clock-history"></i>
+                                    订单历史</a></li>
+                                <li><a class="dropdown-item" th:href="@{/a/system}"
+                                       sec:authorize="hasRole('ROLE_ADMIN')"><i class="bi bi-gear"></i> 进入管理员界面</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/logout}" methods="post">
+                                        <i class="bi bi-box-arrow-right"></i> 退出登录
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-3" th:fragment="footer" style="position: relative; z-index: 1040;">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-3 mb-4">
+                    <h5>关于我们</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">公司简介</a></li>
+                        <li><a href="#" class="text-white-50">招贤纳士</a></li>
+                        <li><a href="#" class="text-white-50">联系我们</a></li>
+                        <li><a href="#" class="text-white-50">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>客户服务</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">帮助中心</a></li>
+                        <li><a href="#" class="text-white-50">售后服务</a></li>
+                        <li><a href="#" class="text-white-50">在线客服</a></li>
+                        <li><a href="#" class="text-white-50">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>支付方式</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50"><i class="bi bi-credit-card me-2"></i>信用卡支付</a></li>
+                        <li><a href="#" class="text-white-50"><i class="bi bi-wallet2 me-2"></i>钱包支付</a></li>
+                        <li><a href="#" class="text-white-50"><i class="bi bi-bank me-2"></i>银行转账</a></li>
+                        <li><a href="#" class="text-white-50"><i class="bi bi-cash-coin me-2"></i>货到付款</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>关注我们</h5>
+                    <div class="d-flex gap-3 fs-4 mb-3">
+                        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-wechat"></i></a>
+                    </div>
+                    <p class="small text-white-50">订阅我们的电子邮件，获取最新优惠</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="您的电子邮箱">
+                        <button class="btn btn-primary">订阅</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-white-50">
+                <p class="mb-0">&copy; 2023 购物网站. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap 本地 -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- jQuery -->
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <!-- 自定义脚本 -->
+    <script th:src="@{/js/script.js}"></script>
+</div>
+>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>购物商城-商品列表</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+        onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+  <!-- Bootstrap 图标 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        onerror="this.onerror=null;">
+  <!-- 已有的本地引用保留作为备选 -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+  <!-- Bootstrap 图标 本地链接 -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/product.css}">
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- 导航栏  -->
+<nav th:insert="~{commons/commons :: navbar}"
+     style=" top: 0; left: 100px; right: 0;"></nav>
+
+<!-- 主要内容 -->
+<main class="flex-grow-1 main-container" style="margin-top: 10px;">
+  <div class="container">
+    <!--    面包屑-->
+    <nav aria-label="breadcrumb" class="mt-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/u/index.html}">首页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">商品列表</li>
+      </ol>
+    </nav>
+    <!-- 筛选栏 -->
+    <form method="get" th:action="@{/u/gonewproduct}">
+      <div class="filter-bar">
+        <select class="form-select" name="category">
+          <option value="">所有分类</option>
+          <option th:each="GoodsType : ${goodstypeList}"
+                  th:text="${GoodsType.getGoodsTypeName()}"
+                  th:value="${GoodsType.getGoodsTypeId()}"
+                  th:selected="${#strings.toString(GoodsType.getGoodsTypeId()) == category}">
+          </option>
+        </select>
+
+        <select class="form-select" name="priceRange">
+          <option value="">价格区间</option>
+          <option value="0-100" th:selected="${priceRange == '0-100'}">￥0 - ￥100</option>
+          <option value="100-500" th:selected="${priceRange == '100-500'}">￥100 - ￥500</option>
+          <option value="500" th:selected="${priceRange == '500'}">￥500以上</option>
+        </select>
+
+        <button type="submit" class="btn">筛选</button>
+        <span class="product-count">共 <span th:text="${count}"></span> 件商品</span>
+      </div>
+    </form>
+
+
+    <!-- 商品展示列表 -->
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4" id="product-list">
+        <!-- 单个商品卡片循环 -->
+        <div th:each="goods : ${goodsList}" class="col">
+          <div class="card h-100 shadow-sm" style="border-color: rgba(255, 87, 34, 0.2); position: relative;">
+            <!-- 整个卡片可点击区域 -->
+            <a th:href="@{/u/detail/{id}(id=${goods.getGoodsId()})}"
+               class="stretched-link text-decoration-none"
+               style="color: inherit; z-index: 1;">
+              <!-- 商品状态提示 -->
+              <div class="position-absolute top-0 start-0 p-2" style="z-index: 2;">
+                <!-- 状态标签内容保持不变 -->
+                <span th:if="${goods.datetimeHoursDiff <= 72}"
+                      class="badge"
+                      style="background: rgba(255, 87, 34, 0.9);">新品上市</span>
+                <span th:if="${goods.getInventory() < 50}"
+                      class="badge mb-1"
+                      style="background-color: rgba(255, 87, 34, 0.6); color: white;"
+                      th:text="'仅剩'+${goods.getInventory}+'件'"></span>
+                <span th:if="${goods.updateHoursDiff <= 24}"
+                      class="badge"
+                      style="background: rgba(255, 87, 34, 0.9);">热卖中🔥</span>
+              </div>
+
+              <!-- 商品图片 -->
+              <div style="height: 200px; flex-shrink: 0;">
+                <img th:src="${goods.getImageUrl()}"
+                     class="card-img-top h-100 w-100"
+                     style="object-fit: contain; padding: 12px;">
+              </div>
+
+              <!-- 卡片内容 -->
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title fs-6"
+                    style="color: rgb(255, 87, 34);"
+                    th:text="${goods.getGoodsName()}"></h5>
+
+                <div class="d-flex justify-content-between small text-muted">
+                  <span th:text="'介绍: ' + ${goods.getDescription()}"></span>
+                </div>
+
+                <div class="mt-auto">
+                  <p class="price fw-bold mb-2"
+                     style="color: rgb(255, 87, 34);"
+                     th:text="'￥' + ${#numbers.formatDecimal(goods.getPrice(), 1, 2)}"></p>
+                </div>
+              </div>
+            </a>
+
+            <!-- 独立定位的购物车按钮 -->
+            <div class="position-absolute bottom-0 end-0 m-2" style="z-index: 2;">
+              <button class="btn cart-btn"
+                      style="background-color: #ff5722; color: white;"
+                      th:data-delete-url="@{/u/addToCart/{id}(id=${goods.getGoodsId()})}" onclick="confirmDelete(event)">
+                加入购物车
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12">
+      <h3 class="border-bottom pb-2 d-flex justify-content-between align-items-center">
+        <span></span>
+        <a th:href="@{/u/goproduct}" class="btn btn-primary px-4 d-flex align-items-center">查看更多</a>
+      </h3>
+    </div>
+  </div>
+</main>
+
+<!-- 页脚 (始终在底部) -->
+<footer th:insert="~{commons/commons :: footer}"
+        style="
+               bottom: 0;
+               left: 0;
+               width: 100%;
+               z-index: 1040;  /* 高于侧边栏的z-index */
+              "> <!-- 添加背景色确保覆盖 -->
+</footer>
+<!-- Bootstrap 本地 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+<!--Axios-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- 自定义脚本 -->
+<script th:src="@{/js/script.js}"></script>
+<script>
+  function confirmDelete(event) {
+    const deleteUrl = event.currentTarget.getAttribute('data-delete-url');
+    window.location.href = deleteUrl;
+
+  }
+</script>
+</body>
+
+</html>

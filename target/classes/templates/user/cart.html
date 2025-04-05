@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>购物商城-购物车</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+          onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+    <!-- Bootstrap 图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+          onerror="this.onerror=null;">
+    <!-- 已有的本地引用保留作为备选 -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+    <!-- Bootstrap 图标 本地链接 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- 导航栏  -->
+<nav th:insert="~{commons/commons :: navbar}"
+     style=" top: 0; left: 100px; right: 0;"></nav>
+
+<!-- 主要内容-->
+<main class="flex-grow-1 main-container">
+    <div class="container py-4">
+        <!-- 面包屑 -->
+        <nav aria-label="breadcrumb" class="mt-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/u/index.html}">首页</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/u/goproduct}">商品列表</a></li>
+                <li class="breadcrumb-item active" aria-current="page">购物车</li>
+            </ol>
+        </nav>
+        <!-- 购物车商品列表 -->
+        <div class="container my-5">
+            <h1 class="mb-4">购物车</h1>
+            <div id="cart-container">
+                <!-- 商品项将动态插入到这里 -->
+            </div>
+            <p class="total-price" id="total-price">总价: ¥0.00</p>
+            <button class="btn checkout-btn">去结算</button>
+        </div>
+    </div>
+</main>
+
+<!-- 页脚 (始终在底部) -->
+<footer th:insert="~{commons/commons :: footer}"
+        style="
+               bottom: 0;
+               left: 0;
+               width: 100%;
+               z-index: 1040;  /* 高于侧边栏的z-index -->
+              "> <!-- 添加背景色确保覆盖 -->
+</footer>
+<!-- Bootstrap 本地 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+<!-- 自定义脚本 -->
+<script th:src="@{/js/script.js}"></script>
+<script th:inline="javascript">
+    const cartData = [[${cart}]]; // 假设这是从后端获取的数据
+
+    // 获取购物车容器
+    const cartContainer = document.getElementById('cart-container');
+
+    // 判断数据是否为空
+    if (!cartData || cartData === "null" || cartData === "[]") {
+        // 如果数据为空，显示提示信息
+        cartContainer.innerHTML = `
+            <div class="empty-cart text-center p-5">
+                <p class="text-muted mb-3">购物车空空的哦~，去看看心仪的商品吧~</p>
+                <a href="/u/goproduct" class="btn btn-primary">去购物</a>
+            </div>
+        `;
+    } else {
+        // 将 JSON 字符串解析为数组
+        let parsedCartData = [];
+        try {
+            parsedCartData = JSON.parse(cartData); // 解析 JSON 字符串
+        } catch (error) {
+            console.error("解析 cartData 失败:", error);
+        }
+
+        // 初始化总价
+        let totalPrice = 0;
+
+        // 使用模板字符串动态生成商品列表
+        const cartItemsHTML = parsedCartData.map(item => {
+            if (!item || typeof item !== 'object') {
+                return ''; // 跳过无效的 item
+            }
+            if (!item.price || !item.goodsName || !item.addTime || !item.goodsId) {
+                console.log("item 缺少必要字段:", item);
+                return ''; // 跳过字段不全的 item
+            }
+            console.log("当前 item:", item); // 确保每个 item 被打印
+            totalPrice += item.price * item.quantity; // 计算总价
+            return `
+            <div class="cart-item d-flex align-items-center p-3 mb-3 bg-light rounded shadow-sm">
+                <!-- 商品图片 -->
+                <img src="${item.imageUrl}" alt="商品图片" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                <!-- 商品详情 -->
+                <div class="item-details flex-grow-1">
+                    <p class="item-name fw-bold mb-1">${item.goodsName}</p>
+                    <p class="item-price text-muted mb-1">价格: ¥${item.price.toFixed(2)}</p>
+                    <p class="item-time text-muted mb-0">添加时间: ${item.addTime}</p>
+                </div>
+
+                <!-- 数量控制 -->
+                <div class="quantity-control d-flex align-items-center me-4">
+                    <button class="btn btn-outline-secondary btn-sm decrease-btn" style="width: 30px;" data-goods-id="${item.goodsId}">-</button>
+                    <input type="text" value="${item.quantity}" class="form-control form-control-sm mx-2 text-center quantity-input" style="width: 50px;" data-goods-id="${item.goodsId}" data-price="${item.price}">
+                    <button class="btn btn-outline-secondary btn-sm increase-btn" style="width: 30px;" data-goods-id="${item.goodsId}">+</button>
+                </div>
+
+                <!-- 删除按钮 -->
+                <a class="btn btn-danger btn-sm px-3 d-flex align-items-center" href="/u/deleteFromCart/${item.goodsId}" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    <i class="fas fa-trash-alt me-2"></i>删除
+                </a>
+            </div>
+            `;
+        }).join(''); // 将数组转换为字符串
+
+        // 将生成的 HTML 插入到购物车容器中
+        cartContainer.innerHTML = cartItemsHTML;
+
+        // 更新总价
+        updateTotalPrice();
+
+        // 更新总价的函数
+        function updateTotalPrice() {
+            let totalPrice = 0;
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+            quantityInputs.forEach(input => {
+                const price = parseFloat(input.getAttribute('data-price'));
+                const quantity = parseInt(input.value);
+                totalPrice += price * quantity;
+            });
+            document.getElementById('total-price').textContent = `总价: ¥${totalPrice.toFixed(2)}`;
+        }
+
+        // 为加减按钮绑定事件监听器
+        document.querySelectorAll('.decrease-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const goodsId = button.getAttribute('data-goods-id');
+                const quantityInput = document.querySelector(`.quantity-input[data-goods-id="${goodsId}"]`);
+                let quantity = parseInt(quantityInput.value);
+                if (quantity > 1) {
+                    quantity--;
+                    quantityInput.value = quantity;
+                    updateTotalPrice();
+                }
+            });
+        });
+
+        document.querySelectorAll('.increase-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const goodsId = button.getAttribute('data-goods-id');
+                const quantityInput = document.querySelector(`.quantity-input[data-goods-id="${goodsId}"]`);
+                let quantity = parseInt(quantityInput.value);
+                quantity++;
+                quantityInput.value = quantity;
+                updateTotalPrice();
+            });
+        });
+
+        // 为数量输入框绑定事件监听器
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('change', () => {
+                updateTotalPrice();
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

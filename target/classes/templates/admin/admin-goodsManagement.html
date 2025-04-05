@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>管理员-商品管理界面</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+          onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+    <!-- Bootstrap 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+          onerror="this.onerror=null;">
+    <!-- 已有的本地引用保留作为备选 -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+    <!-- Bootstrap 图标 本地链接 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+
+</head>
+
+
+<body>
+<div class="container-fluid p-0">
+    <div class="row g-0">
+        <!-- 侧边栏 -->
+        <div class="col-auto px-0 sidebar" id="sidebar">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-relative">
+                <!-- 侧边栏标题和收起按钮 - 合并在一起 -->
+                <div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none w-100">
+                    <div class="d-flex align-items-center flex-grow-1 sidebar-header">
+                        <i class="bi bi-bag-check fs-4"></i>
+                        <span class="fs-5 d-none d-sm-inline ms-2">修改信息</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-light border-0" id="sidebarToggle">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                </div>
+                <!-- 侧边栏菜单 -->
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/a/system}">
+                            <i class="bi bi-house"></i>
+                            <span>主页</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-list-check"></i> 管理
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/a/userManagement}"><i class="bi bi-heart"></i> 用户管理</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/a/goodsManagement}"><i class="bi bi-phone"></i>商品管理</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="col ps-md-2 pt-2" id="main-content">
+            <!-- 导航栏 -->
+            <nav class="navbar navbar-expand-lg navbar-light rounded">
+                <div class="container-fluid">
+                    <!-- 侧边栏折叠按钮（在小屏幕上显示） -->
+                    <button class="btn btn-light d-md-none" id="navSidebarToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <!-- 导航栏左侧选项 -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" th:href="@{/a/system}">主页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">编辑活动</a>
+                            </li>
+                        </ul>
+
+                        <!-- 搜索框和用户头像 -->
+                        <div class="d-flex align-items-center">
+                            <form class="d-flex me-3">
+                                <div class="input-group">
+                                    <input class="form-control" type="search" placeholder="搜索商品..." aria-label="Search">
+                                    <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                                </div>
+                            </form>
+
+                            <!-- 用户头像下拉菜单 - 调整位置 -->
+                            <div class="user-dropdown">
+                                <div class="user-dropdown-wrapper"></div>
+                                <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown">
+                                    <img src="https://via.placeholder.com/35" th:text="${#authentication.principal.username}" alt="用户头像" width="35" height="35" class="rounded-circle">
+                                </a>
+                                <div class="dropdown-connector"></div>
+                                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" th:href="@{/u/index}" sec:authorize="hasRole('ROLE_ADMIN')"><i class="bi bi-clock-history"></i> 回到商城</a></li>
+
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/logout}" methods="post">
+                                            <i class="bi bi-box-arrow-right"></i> 退出登录
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- 管理商品 -->
+            <div class="container-lg mt-4">
+                <div class="row mb-3 align-items-center">
+                    <!-- 查询表单 -->
+                    <div class="col-md-8">
+                        <form th:action="@{/a/selectGoods}" method="get" class="d-flex flex-wrap gap-3 align-items-center">
+                            <!-- 字段选择 -->
+                            <div class="input-group" style="width: 180px;">
+                                <select name="field" th:value="${field}" class="form-select" id="searchField" onchange="updateInputType()">
+                                    <option value="goodsName" th:selected="${field} == 'goodsName'">商品名</option>
+                                    <option value="goodsType" th:selected="${field} == 'goodsType'">商品种类</option>
+                                    <option value="createTime" th:selected="${field} == 'createTime'">入库时间</option>
+                                </select>
+                            </div>
+
+                            <!-- 动态输入区域 -->
+                            <div class="d-flex align-items-center gap-3" id="inputContainer">
+                                <!-- 默认文本输入 -->
+                                <input type="text" name="keyword" id="keywordInput" class="form-control" placeholder="请输入关键词" style="width: 220px;" th:value="${keyword}">
+
+                                <!-- 日期选择器（初始隐藏） -->
+                                <input type="date" name="dateValue" id="dateInput" class="form-control d-none" style="width: 220px;" th:value="${keyword}">
+
+                                <!-- 商品种类（初始隐藏） -->
+                                <div class="input-group d-none" style="width: 220px;" id="typeSelect">
+                                    <select name="goodsType" class="form-select">
+                                        <option value="">请选择商品种类</option>
+                                        <option th:value="${goodstype.getGoodsTypeName()}" th:each="goodstype : ${goodstypes}" th:text="${goodstype.getGoodsTypeName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- 操作按钮区 -->
+                            <div class="d-flex align-items-center gap-3">
+                                <select class="form-select" name="queryType" id="queryType" style="width: 120px;">
+                                    <option value="exact" th:selected="${queryType == 'exact'}">普通查询</option>
+                                    <option value="fuzzy" th:selected="${queryType == 'fuzzy'}">模糊查询</option>
+                                </select>
+
+                                <!-- 搜索按钮 -->
+                                <button type="submit" class="btn btn-primary px-4 d-flex align-items-center" style="background-color: rgb(255, 87, 34); border-color: rgb(255, 87, 34); color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                    <i class="fas fa-search me-2"></i>搜索
+                                </button>
+
+                                <!-- 重置按钮 -->
+                                <a th:href="@{/a/goodsManagement}" class="btn btn-secondary px-4 d-flex align-items-center" style="background-color: rgb(108, 117, 125); border-color: rgb(108, 117, 125); color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                    <i class="fas fa-redo-alt me-2"></i>重置
+                                </a>
+                            </div>
+                        </form>
+                        <!-- 消息提示 -->
+                        <div class="ms-2">
+                            <span th:text="${message2}" class="text-success small me-2"></span>
+                            <span th:text="${message1}" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <!-- 添加商品分类和添加商品按钮 -->
+                    <div class="col-md-4 d-flex justify-content-end gap-3">
+                        <!-- 添加商品分类按钮 -->
+                        <a th:href="@{/a/addGoodsType}" class="btn btn-success px-4 d-flex align-items-center" style="background-color: rgb(40, 167, 69); border-color: rgb(40, 167, 69); color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                            <i class="fas fa-tags me-2"></i>添加分类
+                        </a>
+                        <!-- 添加商品按钮 -->
+                        <a th:href="@{/a/addGoods}" class="btn btn-primary px-4 d-flex align-items-center" style="background-color: rgb(0, 123, 255); border-color: rgb(0, 123, 255); color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                            <i class="fas fa-box me-2"></i>添加商品
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 商品展示列表 -->
+                <div class="table-responsive rounded shadow-sm overflow-x-auto">
+                    <table class="table table-hover table-bordered mb-0">
+                        <thead class="table-dark">
+                        <tr class="bg-gradient">
+                            <th class="w-10 px-3 py-2 text-sm text-center">商品ID</th>
+                            <th class="w-20 px-3 py-2 text-sm text-center">商品名称</th>
+                            <th class="w-15 px-3 py-2 text-sm text-center">商品分类</th>
+                            <th class="w-10 px-3 py-2 text-sm text-center">价格</th>
+                            <th class="w-10 px-3 py-2 text-sm text-center">库存</th>
+                            <th class="w-15 px-3 py-2 text-sm text-center">入库时间</th>
+                            <th class="w-15 px-3 py-2 text-sm text-center">更新时间</th>
+                            <th class="w-20 px-3 py-2 text-sm text-center">产品介绍</th>
+                            <th class="w-15 px-3 py-2 text-sm text-center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="goods : ${goodsList}">
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getGoodsId()}"></td>
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getGoodsName()}"></td>
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getGoodsType()}"></td>
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getPrice()}"></td>
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getInventory()}"></td>
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getDatetime()}"></td>
+                            <td class="px-3 py-2 align-middle text-center" th:text="${goods.getUpdateTime()}"></td>
+                            <td class="px-3 py-2 align-middle text-center">
+                                <span class="text-truncate d-inline-block" style="max-width: 150px;" data-bs-toggle="tooltip" th:title="${goods.getDescription()}" th:text="${goods.getDescription()}"></span>
+                            </td>
+                            <td class="px-3 py-2 align-middle">
+                                <div class="d-flex gap-2 justify-content-center">
+                                    <!-- 编辑按钮 -->
+                                    <a class="btn btn-primary btn-sm px-3 d-flex align-items-center" style="background-color: rgb(0, 123, 255); border-color: rgb(0, 123, 255); color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" th:href="@{/a/updateGoods/{id}(id=${goods.goodsId})}">
+                                        <i class="fas fa-edit me-2"></i>编辑
+                                    </a>
+                                    <!-- 删除按钮 -->
+                                    <button class="btn btn-danger btn-sm px-3 d-flex align-items-center" style="background-color: rgb(220, 53, 69); border-color: rgb(220, 53, 69); color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" th:data-delete-url="@{/a/goodsDelete/{id}(id=${goods.getGoodsId()})}" onclick="confirmDelete(event)">
+                                        <i class="fas fa-trash-alt me-2"></i>删除
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap 本地 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+<!-- 自定义脚本 -->
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
+<script>
+    // 删除功能
+    function confirmDelete(event) {
+        const deleteUrl = event.currentTarget.getAttribute('data-delete-url');
+        if (confirm('确定要删除该商品吗？')) {
+            window.location.href = deleteUrl;
+        }
+    }
+
+    // 动态输入控制
+    function updateInputType() {
+        const field = document.getElementById('searchField').value;
+        const components = {
+            keywordInput: document.getElementById('keywordInput'),
+            dateInput: document.getElementById('dateInput'),
+            typeSelect: document.getElementById('typeSelect')
+        };
+
+        // 安全隐藏所有组件
+        Object.values(components).forEach(el => {
+            if (el) el.classList.add('d-none');
+        });
+
+        // 强制显示逻辑（新增保险措施）
+        if (!field || field === 'goodsName') {
+            components.keywordInput.classList.remove('d-none');
+            components.keywordInput.placeholder = getPlaceholder('goodsName');
+            return;
+        }
+
+        // 正常切换逻辑
+        switch (field) {
+            case 'createTime':
+                components.dateInput?.classList.remove('d-none');
+                components.dateInput.value = localStorage.getItem(field) || '';
+                break;
+            case 'goodsType':
+                components.typeSelect?.classList.remove('d-none');
+                const select = components.typeSelect.querySelector('select');
+                if (select) select.value = localStorage.getItem(field) || '';
+                break;
+            default:
+                components.keywordInput?.classList.remove('d-none');
+                components.keywordInput.placeholder = getPlaceholder(field);
+                components.keywordInput.value = localStorage.getItem(field) || '';
+        }
+    }
+
+
+    // 初始化输入监听
+    function initInputListeners() {
+        // 文本输入
+        document.getElementById('keywordInput').addEventListener('input', function() {
+            const field = document.getElementById('searchField').value;
+            localStorage.setItem(field, this.value);
+        });
+
+        // 日期输入
+        document.getElementById('dateInput').addEventListener('change', function() {
+            localStorage.setItem('createTime', this.value);
+        });
+
+        // 商品种类选择
+        document.querySelector('#typeSelect select').addEventListener('change', function() {
+            localStorage.setItem('goodsType', this.value);
+        });
+    }
+
+    // 页面加载初始化
+    window.addEventListener('load', function() {
+        // 恢复上次选择的字段
+        const lastField = localStorage.getItem('lastSearchField') || 'goodsName';
+        document.getElementById('searchField').value = lastField;
+
+        // 初始化组件状态
+        updateInputType();
+        initInputListeners();
+    });
+
+    // 字段切换监听
+    document.getElementById('searchField').addEventListener('change', function() {
+        localStorage.setItem('lastSearchField', this.value);
+        updateInputType();
+    });
+
+    // 重置功能优化
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector('a[href*="/a/userManagement"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            // 清除所有相关存储项
+            ['lastSearchField', 'goodsName', 'goodsType', 'createTime'].forEach(key => {
+                localStorage.removeItem(key);
+            });
+            window.location.href = this.href;
+        });
+    });
+    // 初始化 Tooltip(商品介绍)
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+</body>
+
+</html>

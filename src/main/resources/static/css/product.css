@@ -1,0 +1,392 @@
+.filter-bar {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+}
+
+.filter-label {
+    color: #666;
+    font-size: 14px;
+    min-width: 70px;
+    font-weight: 500;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-option {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #f8f9fa;
+}
+
+.filter-option:hover {
+    color: #ff5722;
+    background-color: #fff5f2;
+}
+
+.filter-option.active {
+    background-color: #ff5722;
+    color: white;
+}
+
+.sort-bar {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.sort-btn {
+    color: #666;
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sort-btn:hover,
+.sort-btn.active {
+    color: #ff5722;
+}
+
+.sort-btn i {
+    font-size: 12px;
+}
+
+.view-switch {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.view-btn {
+    color: #666;
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.view-btn:hover,
+.view-btn.active {
+    color: #ff5722;
+}
+
+.product-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    background-color: #fff;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-img {
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+.product-title {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 48px;
+}
+
+.product-price {
+    color: #ff5722;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.product-original-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+.product-sales {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.product-rating {
+    color: #ffc107;
+    margin-right: 5px;
+}
+
+.quick-buy-btn {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    background-color: #ff5722;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    transition: bottom 0.3s;
+    opacity: 0;
+    text-decoration: none;
+}
+
+.product-card:hover .quick-buy-btn {
+    bottom: 0;
+    opacity: 1;
+}
+
+.category-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255,87,34,0.9);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff1744;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.pagination {
+    margin-top: 30px;
+}
+
+.pagination .page-link {
+    color: #ff5722;
+    border: none;
+    margin: 0 3px;
+    border-radius: 4px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff5722;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #fff5f2;
+    color: #ff5722;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+/* 筛选栏样式 */
+.filter-bar {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-bar .form-select {
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    flex: 1 1 200px;
+}
+
+.filter-bar .form-select:focus {
+    border-color: rgb(255, 87, 34);
+    box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.2);
+}
+
+.filter-bar .btn {
+    background-color: rgb(255, 87, 34);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    flex: 1 1 100px;
+}
+
+.filter-bar .btn:hover {
+    background-color: rgba(255, 87, 34, 0.9);
+}
+
+.filter-bar .product-count {
+    font-size: 14px;
+    color: #666;
+    margin-left: auto;
+    flex: 1 1 100%;
+    text-align: right;
+}
+
+/* 商品列表样式 */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* 商品卡片样式 */
+.product-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card .card-body {
+    padding: 15px;
+}
+
+.product-card .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.product-card .card-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.product-card .price {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(255, 87, 34);
+    margin-bottom: 15px;
+}
+
+.product-card .btn {
+    width: 100%;
+    background-color: rgb(255, 87, 34);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .btn:hover {
+    background-color: rgba(255, 87, 34, 0.9);
+}
+.breadcrumb-item a {
+    color: inherit; /* 继承父元素的颜色 */
+}
+/* 自定义卡片尺寸控制 */
+#product-list .col {
+    flex: 0 0 20%; /* 强制每列占20%宽度 */
+    max-width: 20%; /* 兼容旧浏览器 */
+    padding: 8px; /* 控制间距 */
+}
+
+.card-fixed {
+    min-height: 380px; /* 设定最小高度 */
+    transition: all 0.3s ease; /* 添加悬浮动效 */
+}
+.card-fixed:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 87, 34, 0.2);
+}
+/* 去除所有卡片内链接的下划线 */
+#product-list a,
+#product-list a:hover,
+#product-list a:focus {
+    text-decoration: none !important;
+}
+.breadcrumb a {
+    color: inherit; /* 继承父元素的颜色，通常是黑色 */
+    text-decoration: none; /* 去掉下划线 */
+}
+
+.breadcrumb a:hover {
+    color: inherit; /* 保持鼠标悬停时的颜色不变 */
+    text-decoration: none; /* 保持鼠标悬停时没有下划线 */
+}

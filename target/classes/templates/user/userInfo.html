@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>个人信息</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"
+        onerror="this.onerror=null;this.href='css/bootstrap.min.css';">
+  <!-- Bootstrap 图标 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        onerror="this.onerror=null;">
+  <!-- 已有的本地引用保留作为备选 -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-local" disabled>
+  <!-- Bootstrap 图标 本地链接 -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap-icons.css}" id="bootstrap-icons-local" disabled>
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<!-- 导航栏 (固定定位并偏移) -->
+<nav th:insert="~{commons/commons :: navbar}"
+     style=" top: 0; left: 100px; right: 0;"></nav>
+<!-- 主要内容  -->
+<main class="flex-grow-1 main-container">
+  <div id="main-content">
+    <!-- 主页面内容 -->
+    <!-- 修改用户信息 -->
+    <div class="container-lg mt-4">
+      <form th:action="@{/u/updateUser}" method="post" class="charts-render-monitor" style="max-width: 500px; width: 100%;">
+        <input type="hidden" name="userId" th:value="${user.getUserId()}">
+
+        <div class="form-group">
+          <label for="username">用户名：</label>
+          <input type="text" id="username" name="userName" class="form-control" th:value="${user.getUsername()}">
+        </div>
+        <hr>
+        <!--         可以添加查看密码-->
+        <div class="form-group">
+          <label for="username">密码：</label>
+          <input type="password" id="password" name="password" class="form-control" th:value="${user.getPassword()}" readonly>
+          <button type="button"
+                  class="btn btn-warning"
+                  style="margin-top: 10px"
+                  onclick="location.href='/u/gopasswordUpdate'">
+            <i class="fas fa-lock"></i> 修改密码
+          </button>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+          <label for="email">邮箱：</label>
+          <input type="email" id="email" name="email" class="form-control" th:value="${user.getEmail()}">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="age">年龄：</label>
+          <input type="text" id="age" name="age" class="form-control" th:value="${user.getAge()}">
+        </div>
+        <hr>
+        <div class="form-group">
+          <div>性别：</div>
+          <div class="form-check form-check-inline">
+            <input type="radio" id="gender-male" name="gender" value="1" th:checked="${user.getGender()==1}" class="form-check-input"
+                   checked>
+            <label class="form-check-label" for="gender-male">男</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" id="gender-female" name="gender" value="0" th:checked="${user.getGender()==0}" class="form-check-input">
+            <label class="form-check-label" for="gender-female">女</label>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="number">手机号：</label>
+          <input type="text" id="number" name="number" class="form-control" th:value="${user.getNumber()}">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="address">地址：</label>
+          <input type="text" id="address" name="address" class="form-control" th:value="${user.getAddress()}">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="birth">注册时间：</label>
+          <input type="text" id="birth" name="createTime" class="form-control" th:value="${user.getCreateTime()}">
+        </div>
+        <hr>
+
+        <!-- 提交按钮区域 -->
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-primary mr-3">提交</button>
+          <button type="reset" class="btn btn-secondary">重置</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- 页脚 (始终在底部) -->
+<footer th:insert="~{commons/commons :: footer}"
+        style="
+               bottom: 0;
+               left: 0;
+               width: 100%;
+               z-index: 1040;  /* 高于侧边栏的z-index */
+              "> <!-- 添加背景色确保覆盖 -->
+</footer>
+<!-- Bootstrap 本地 -->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+<!-- 自定义脚本 -->
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

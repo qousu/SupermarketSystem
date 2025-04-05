@@ -1,0 +1,20 @@
+spring:
+  datasource:
+   username: root
+   password: 123456
+   url: jdbc:mysql://localhost:3306/supermarket?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+   driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
+
+# 配置日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  # 开启驼峰命名
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+

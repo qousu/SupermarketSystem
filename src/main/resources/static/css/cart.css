@@ -1,0 +1,92 @@
+/* 自定义样式 */
+.cart-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+}
+.cart-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.cart-item img {
+    border-radius: 8px;
+    max-width: 100px;
+    height: auto;
+}
+.cart-item .item-details {
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+.cart-item .item-details p {
+    margin: 0.5rem 0;
+}
+.cart-item .item-details .item-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+.cart-item .item-details .item-price {
+    font-size: 1.1rem;
+    color: #e44d26;
+}
+.cart-item .item-details .item-time {
+    font-size: 0.9rem;
+    color: #666;
+}
+.cart-item .item-details .item-id {
+    font-size: 0.9rem;
+    color: #999;
+}
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.quantity-control input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+    border-radius: 4px;
+}
+.total-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 1rem;
+}
+.checkout-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #e44d26;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+.checkout-btn:hover {
+    background-color: #d1401f;
+}
+.breadcrumb a {
+    color: inherit; /* 继承父元素的颜色，通常是黑色 */
+    text-decoration: none; /* 去掉下划线 */
+}
+
+.breadcrumb a:hover {
+    color: inherit; /* 保持鼠标悬停时的颜色不变 */
+    text-decoration: none; /* 保持鼠标悬停时没有下划线 */
+}

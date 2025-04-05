@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMall 数码商城</title>
+
+    <!-- 样式表 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2a6cbe;
+            --secondary-color: #6c757d;
+            --accent-color: #ff6b6b;
+            --sidebar-width: 240px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            z-index: 1030;
+            transition: all 0.3s;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            border-right: 1px solid #dee2e6;
+        }
+
+        .main-container {
+            margin-left: var(--sidebar-width);
+            transition: margin 0.3s;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            color: var(--secondary-color);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(var(--primary-color), 0.1);
+            color: var(--primary-color);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-sale {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .quick-category {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .quick-category:hover {
+            transform: scale(1.05);
+        }
+
+        .quick-category i {
+            transition: color 0.3s;
+        }
+
+        .quick-category:hover i {
+            color: var(--accent-color) !important;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-container {
+                margin-left: 0;
+            }
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- 侧边栏 -->
+<nav th:fragment="sidebar" class="sidebar" id="sidebar">
+    <div class="d-flex flex-column h-100 px-3 pt-3">
+        <div class="d-flex align-items-center mb-4">
+            <i class="bi bi-shop fs-3 text-primary"></i>
+            <span class="fs-5 fw-bold ms-2">TechMall</span>
+            <button class="btn btn-link ms-auto d-none d-md-block" id="sidebarToggle">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+        </div>
+
+        <ul class="nav nav-pills flex-column flex-grow-1">
+            <li class="nav-item mb-2">
+                <a class="nav-link active" href="#">
+                    <i class="bi bi-house-door me-2"></i>首页
+                </a>
+            </li>
+            <li class="nav-item dropdown mb-2">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-grid me-2"></i>商品分类
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-phone"></i> 智能手机</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-laptop"></i> 笔记本电脑</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-camera"></i> 摄影摄像</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-smartwatch"></i> 智能穿戴</a></li>
+                </ul>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-heart me-2"></i>收藏夹
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-cart3 me-2"></i>购物车
+                </a>
+            </li>
+            <li class="nav-item mt-auto">
+                <div class="alert alert-primary mb-0">
+                    <small>每日特惠<br>限时抢购中</small>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- 主内容 -->
+<main class="main-container">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-md bg-white shadow-sm py-3">
+        <div class="container-fluid">
+            <button class="btn btn-primary d-md-none" id="mobileMenuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            <form class="w-100 mx-3">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="搜索商品...">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <a class="btn btn-link" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle fs-5"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> 个人中心</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> 退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 内容区 -->
+    <div class="container-fluid px-4 py-4">
+        <!-- 轮播图 -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner rounded-3 shadow">
+                        <div class="carousel-item active">
+                            <img src="https://source.unsplash.com/1200x400/?smartphone"
+                                 class="d-block w-100"
+                                 style="height: 400px; object-fit: cover;">
+                            <div class="carousel-caption text-start">
+                                <h2 class="fw-bold">旗舰手机限时特惠</h2>
+                                <p class="fs-5">最高直降2000元</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://source.unsplash.com/1200x400/?laptop"
+                                 class="d-block w-100"
+                                 style="height: 400px; object-fit: cover;">
+                            <div class="carousel-caption text-end">
+                                <h2 class="fw-bold">新款笔记本上市</h2>
+                                <p class="fs-5">预约享优先购买权</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快速分类 -->
+        <div class="row mb-5">
+            <div class="col-12 mb-4">
+                <h4 class="fw-bold"><i class="bi bi-lightning-charge text-warning"></i> 快速通道</h4>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="quick-category text-center p-3 bg-white rounded-3 shadow-sm">
+                    <div class="icon-wrapper mb-3">
+                        <i class="bi bi-phone fs-1 text-primary"></i>
+                    </div>
+                    <div class="fw-medium">智能手机</div>
+                </div>
+            </div>
+            <!-- 重复类似结构添加其他分类 -->
+        </div>
+
+        <!-- 热门商品 -->
+        <div class="row mb-5">
+            <div class="col-12 mb-4">
+                <h4 class="fw-bold"><i class="bi bi-fire text-danger"></i> 热销商品</h4>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="card h-100 position-relative">
+                    <span class="badge-sale">爆款</span>
+                    <img src="https://source.unsplash.com/400x300/?smartphone"
+                         class="card-img-top"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">iPhone 15 Pro</h5>
+                        <p class="text-secondary small">A17芯片 钛金属设计</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-danger fw-bold fs-5">¥8999</div>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 重复类似结构添加其他商品 -->
+        </div>
+    </div>
+</main>
+
+<!-- 脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 侧边栏切换
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('collapsed');
+        document.querySelector('.main-container').classList.toggle('collapsed');
+        this.querySelector('i').classList.toggle('bi-chevron-left');
+        this.querySelector('i').classList.toggle('bi-chevron-right');
+    });
+
+    // 移动端菜单切换
+    document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('mobile-open');
+    });
+
+    // 轮播图自动播放
+    const myCarousel = new bootstrap.Carousel('#mainCarousel', {
+        interval: 5000,
+        wrap: true
+    });
+</script>
+</body>
+</html>
