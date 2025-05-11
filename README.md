@@ -1,2 +1,2 @@
 # SupermarketSystem
-springboot+springMVC整合开发的小型web项目
+springboot+thymeleaf模版引擎的前后不分离的一个简易的购物网站
